@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+*.log
+
+# Env / Secrets
+.env
+.env.*
+
+# VSCode settings
+.vscode/
+.history/
+
+# Dev Containers
+.devcontainer/devcontainer.json
+
+# Byte-compiled / compiled files
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pyc.*
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Pytest / Coverage
+htmlcov/
+.tox/
+.nox/
+.cache/
+coverage.*
+nosetests.xml
+*.cover
+*.py,cover
+*.hypothesis/
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# MyPy
+.mypy_cache/f
+.dmypy.json
+dmypy.json
+
+# Pyright
+pyrightconfig.json
+pyright/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Logs
+*.log
+*.out
+*.pid
+
+# Docker
+*.pid
+*.seed
+docker-compose.override.yml
+docker-compose.local.yml
+Dockerfile.dev
+
+# System
+.DS_Store
+Thumbs.db
