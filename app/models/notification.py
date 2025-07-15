@@ -3,6 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
 from datetime import datetime
+from sqlalchemy.dialects.postgresql import JSONB
 
 
 from app.database import Base
@@ -15,6 +16,7 @@ class Notification(Base):
     title = Column(String, nullable=False)
     message = Column(String, nullable=False)
     recipient_id = Column(String, nullable=False)
+    recipient = Column(JSONB, nullable=False)
     type = Column(Enum(NotificationType), nullable=False)
     template_id = Column(UUID(as_uuid=True), ForeignKey("templates.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
