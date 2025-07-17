@@ -16,5 +16,5 @@ class NotificationStatus(str, Enum):
 class NotificationChannel(str, Enum):
     email = "email"
     sms = "sms"
-    push = "push"
-    websocket = "websocket"
+    # push = "push"
+    # websocket = "websocket"
