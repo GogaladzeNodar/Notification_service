@@ -5,7 +5,7 @@ class SMSChannel(BaseChannel):
     SMS channel for sending notifications.
     """
 
-    def send(self, recipient: dict, message: str, **kwargs) -> None:
+    def send_notification(self, recipient: dict, message: str, **kwargs) -> None:
         """
         Send an SMS notification to the recipient.
         """
