@@ -1,6 +1,7 @@
-from app.services.channels.BaseNotification import BaseChannel
+from app.services.channels.base_notification import BaseChannels
 
-class SMSChannel(BaseChannel):
+
+class SMSChannel(BaseChannels):
     """
     SMS channel for sending notifications.
     """
@@ -9,4 +10,4 @@ class SMSChannel(BaseChannel):
         """
         Send an SMS notification to the recipient.
         """
-        pass
+        print(f"[MOCK SMS] Sending SMS to {recipient['phone']}: {message}")

@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime
 import uuid
 
-from app.database import Base
+from app.db.session import Base
 from app.models.enums import NotificationChannel
 
 class Template(Base):

@@ -6,7 +6,7 @@ from datetime import datetime
 from sqlalchemy.dialects.postgresql import JSONB
 
 
-from app.database import Base
+from app.db.session import Base
 from app.models.enums import NotificationType
 
 class Notification(Base):

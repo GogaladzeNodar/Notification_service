@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from models.template import Template
+from app.models.template import Template
 
 class TemplateRenderer:
     def __init__(self, session: AsyncSession, fallback_lang: str = "en"):

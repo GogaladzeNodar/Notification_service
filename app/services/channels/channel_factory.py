@@ -1,9 +1,9 @@
-from app.services.channels.BaseNotification import BaseChannel
+from app.services.channels.base_notification import BaseChannels
 from app.services.channels.email import EmailChannel
 from app.services.channels.sms import SMSChannel
 
 
-def get_channel(channel_type: str) -> BaseChannel:
+def get_channel(channel_type: str) -> BaseChannels:
     """
     Factory function to get the appropriate channel instance based on the channel type.
     
