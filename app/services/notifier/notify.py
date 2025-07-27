@@ -14,4 +14,5 @@ class NotificationService:
             lang=notification.language,
             context=notification.context
         )
-        self.dispatcher.dispatch(notification.channel, notification.recipient, message)
+        recipient_data = notification.recipient.model_dump() 
+        await self.dispatcher.dispatch(notification.channel, recipient_data, message)

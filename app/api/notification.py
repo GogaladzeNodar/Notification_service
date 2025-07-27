@@ -20,7 +20,7 @@ def create_notification(payload: NotificationCreateSchema, db: Session = Depends
     db.commit()
     db.refresh(notification)
 
-    send_notification_task.delay(notification.id, payload.recipient.dict())
+    send_notification_task.delay(notification.id)  #payload.recipient.dict()
 
     return {"status": "queued", "notification_id": notification.id}
 

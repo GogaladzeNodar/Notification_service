@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class BaseChannels(ABC):
     @abstractmethod
-    def send_notification(self, recipient: dict, message: str, **kwargs):
+    async def send_notification(self, recipient: dict, message: str, **kwargs):
         """
         Sends a notification to the recipient.
             
