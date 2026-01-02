@@ -12,10 +12,10 @@ class TemplateRenderer:
         for lang in [lang, self.fallback_lang]:
             stmt = select(Template).where(
                 Template.name == name,
-                Template.lang == lang 
+                Template.language == lang 
             )
             result = await self.session.execute(stmt)
-            template = result.scalar_one_or_none()
+            template = result.scalars().first()
             if template:
                 return template
         
@@ -24,7 +24,10 @@ class TemplateRenderer:
     def render(self, template_str: str, context: dict) -> str:
         return template_str.format(**context)
 
-    async def render_by_name(self, name: str, lang: str, context: dict) -> str:
+    async def render_by_name(self, name: str, lang: str, context: dict) -> dict:
         template = await self.get_template(name, lang)
-        return self.render(template.body, context)
+        return {
+            "title": self.render(template.title_tpl or "", context),
+            "body": self.render(template.body, context)
+        }
     

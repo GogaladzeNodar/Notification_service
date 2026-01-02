@@ -1,16 +1,18 @@
 services:
   notification-server:
     build: .
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
     volumes:
       - .:/app
+
     depends_on:
       - redis
       - db
     environment:
       - REDIS_HOST=redis
+      - PYTHONDONTWRITEBYTECODE=1
       - REDIS_PORT=6379
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/notifications_db
 

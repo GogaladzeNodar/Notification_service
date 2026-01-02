@@ -9,10 +9,10 @@ class NotificationService:
         self.dispatcher = NotificationDispatcher()
 
     async def process_and_dispatch(self, notification: Notification) -> None:
-        message = await self.template_renderer.render_by_name(
-            name=notification.template_name,
+        rendered = await self.template_renderer.render_by_name(
+            name=notification.template_code,
             lang=notification.language,
-            context=notification.context
+            context=notification.data
         )
-        recipient_data = notification.recipient.model_dump() 
-        await self.dispatcher.dispatch(notification.channel, recipient_data, message)
+        recipient_data = notification.recipient
+        await self.dispatcher.dispatch(notification.channel, recipient_data, rendered)

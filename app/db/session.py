@@ -3,6 +3,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
+from typing import AsyncGenerator
+from contextlib import asynccontextmanager
 
 from app.config import settings
 
@@ -31,3 +33,20 @@ sync_session = sessionmaker(
 )
 
 Base = declarative_base()
+
+# Dependency for FastAPI
+def get_db():
+    db = sync_session()
+    try:
+        yield db
+    finally:
+        db.close()
+
+# Async dependency
+@asynccontextmanager
+async def get_async_db():
+    session = async_session()
+    try:
+        yield session
+    finally:
+        await session.close()
