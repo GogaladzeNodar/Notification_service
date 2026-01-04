@@ -6,17 +6,15 @@ import asyncio
 
 @celery_app.task(name="send_notification_task", bind=True)
 def send_notification_task(self, notification_id: int):
-    async def _main():
-        async with async_session() as session:
-            processor = NotificationProcessor(session)
-            await processor.process(notification_id)
-
     try:
-        asyncio.run(_main())
+        async def _main():
+            async with async_session() as session:
+                processor = NotificationProcessor(session)
+                await processor.process(notification_id)
+
+        asyncio.get_event_loop().run_until_complete(_main())
         return f"Notification {notification_id} sent"
     except Exception as e:
         self.retry(exc=e, countdown=10, max_retries=3)
-                
-
 
 

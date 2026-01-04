@@ -1,28 +1,30 @@
 from app.services.channels.base_notification import BaseChannels
 from app.services.channels.email import EmailChannel
 from app.services.channels.sms import SMSChannel
+from app.infrastructure.email.email_client import EmailClient
+from app.infrastructure.email.email_config import build_fast_mail
 
 
 class ChannelFactory:
-    """
-    Factory class to create channel instances based on the channel type.
-    
-    This class provides a method to get the appropriate channel instance
-    based on the provided channel type.
-    """
-
     def __init__(self):
-        self._channels = {
-            "sms": SMSChannel(),
-            "email": EmailChannel(),
+        self._email_client = EmailClient(build_fast_mail())
+
+        self._builders = {
+            "email": self._build_email_channel,
+            "sms": self._build_sms_channel,
         }
-            
-    
+
+    def _build_email_channel(self) -> BaseChannels:
+        return EmailChannel(self._email_client)
+
+    def _build_sms_channel(self) -> BaseChannels:
+        return SMSChannel()
+
     def get_channel(self, channel_type: str) -> BaseChannels:
-        channel_class = self._channels.get(channel_type)
-        if not channel_class:
+        try:
+            return self._builders[channel_type]()
+        except KeyError:
             raise ValueError(f"Unsupported channel type: {channel_type}")
-        return channel_class
 
 
 

@@ -7,7 +7,7 @@ class RecipientSchema(BaseModel):
     email: Optional[str] = None
 
 
-class NotificationSchema(BaseModel):
+class NotificationCreateSchema(BaseModel):
     template_code: str
     channel: Literal["sms", "email", "push"]
     recipient: RecipientSchema
