@@ -20,7 +20,7 @@ class Notification(Base):
     language = Column(String, default="ka")
     title = Column(String, nullable=True)
     message = Column(String, nullable=True)
-    status = Column(Enum(NotificationStatus), nullable=False, default=NotificationStatus.sent)
+    status = Column(Enum(NotificationStatus), nullable=False, server_default=NotificationStatus.pending)
     type = Column(Enum(NotificationType), nullable=False, default=NotificationType.info)
     template_id = Column(UUID(as_uuid=True), ForeignKey("templates.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
