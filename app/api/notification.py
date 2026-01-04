@@ -39,7 +39,7 @@ def create_notification(payload: NotificationCreateSchema, db: Session = Depends
         db.refresh(notification)
         print(f"Notification created with ID: {notification.id}")
 
-        # send_notification_task.delay(notification.id)  # commented for testing
+        send_notification_task.delay(notification.id)  
 
         return {"status": "queued", "notification_id": notification.id}
     except Exception as e:

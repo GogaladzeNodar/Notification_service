@@ -1,4 +1,6 @@
+from app.models.enums import NotificationStatus
 from app.models.notification import Notification
+from app.schemas import notification
 from app.services.notifier.notify import NotificationService
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,8 +15,11 @@ class NotificationProcessor:
         if not notification:
             raise ValueError(f"Notification with ID {notification_id} not found.")
         
-        await self.service.process_and_dispatch(notification)
-        
-        
-
-    
+        try:
+            await self.service.process_and_dispatch(notification)
+            notification.status = NotificationStatus.SENT
+        except Exception:
+            notification.status = NotificationStatus.FAILED
+            raise
+        finally:
+            await self.session.commit()

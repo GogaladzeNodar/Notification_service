@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 from app.db.session import Base
-from app.models.enums import NotificationType, NotificationChannel
+from app.models.enums import NotificationType, NotificationChannel, NotificationStatus
 
 class Notification(Base):
     __tablename__ = "notifications"
@@ -20,6 +20,7 @@ class Notification(Base):
     language = Column(String, default="ka")
     title = Column(String, nullable=True)
     message = Column(String, nullable=True)
+    status = Column(Enum(NotificationStatus), nullable=False, default=NotificationStatus.sent)
     type = Column(Enum(NotificationType), nullable=False, default=NotificationType.info)
     template_id = Column(UUID(as_uuid=True), ForeignKey("templates.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
