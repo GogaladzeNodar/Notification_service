@@ -16,7 +16,7 @@ class EmailClient:
             subject=subject,
             recipients=recipients,
             body=body,
-            subtype=MessageType.HTML if html else MessageType.PLAIN,
+            subtype=MessageType.html if html else MessageType.plain,
         )
 
         await self._fast_mail.send_message(message)

@@ -15,6 +15,7 @@ class EmailChannel(BaseChannels):
         """
         Send an email notification to the recipient.
         """
+        print(f"[DEBUG] Sending email to {recipient['email']} with subject '{message['title']}' and body '{message['body']}'")
         await self._email_client.send(
             subject=message["title"],
             recipients=[recipient["email"]],

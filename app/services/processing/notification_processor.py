@@ -17,9 +17,9 @@ class NotificationProcessor:
         
         try:
             await self.service.process_and_dispatch(notification)
-            notification.status = NotificationStatus.SENT
+            notification.status = NotificationStatus.sent
         except Exception:
-            notification.status = NotificationStatus.FAILED
+            notification.status = NotificationStatus.failed
             raise
         finally:
             await self.session.commit()
