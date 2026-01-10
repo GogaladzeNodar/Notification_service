@@ -38,5 +38,5 @@ class TemplateRenderer:
         template = await self.get_template(name, lang)
         return {
             "title": self.render(template.title_tpl or "", context),
-            "body": self.render(template.body, context),
+            "body": self.render(template.body_tpl, context),
         }
